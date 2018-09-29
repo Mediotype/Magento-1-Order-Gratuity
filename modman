@@ -1,0 +1,5 @@
+app/code/community/Mediotype/OrderGratuity/ app/code/community/Mediotype/OrderGratuity/
+app/design/frontend/base/default/layout/mediotype_tipping.xml app/design/frontend/base/default/layout/mediotype_tipping.xml
+app/design/frontend/base/default/template/tipping app/design/frontend/base/default/template/tipping
+app/etc/modules/Mediotype_OrderGratuity.xml app/etc/modules/Mediotype_OrderGratuity.xml
+Order_Gratuity.xml var/connect/Order_Gratuity.xml

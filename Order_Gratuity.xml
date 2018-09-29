@@ -1,0 +1,125 @@
+<_>
+   <form_key>h44VR0erP4UAwt7k</form_key>
+   <name>Order_Gratuity</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>Give your customers the ability to add a tip to their orders from the cart or checkout</summary>
+   <description>Compatible with Community Editions 1.5, 1.6, 1.7, 1.8, 1.9 and Enterprise Edition 1.11, 1.12, 1.13, 1.14.
+
+Adds input fields and associated labels to the cart and checkout pages that allow for customers to add gratuity to orders</description>
+   <license>Custom License</license>
+   <license_uri>http://www.mediotype.com/magento-extension-shop/license</license_uri>
+   <version>1.0.5</version>
+   <stability>stable</stability>
+   <notes>Updated logic for disabling module
+Added new logic to cart page output
+Added new logic to checkout review output
+</notes>
+   <authors>
+      <name>
+         <name>Mediotype</name>
+      </name>
+      <user>
+         <user>mprototype</user>
+      </user>
+      <email>
+         <email>joel@mediotype.com</email>
+      </email>
+   </authors>
+   <depends_php_min>5.2.13</depends_php_min>
+   <depends_php_max>5.4.4</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                   </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>magecommunity</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>mageetc</target>
+         <target>mageetc</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>mageskin</target>
+         <target>magecommunity</target>
+      </target>
+      <path>
+         <path/>
+         <path>Mediotype/OrderGratuity</path>
+         <path>frontend/base/default/layout/mediotype_tipping.xml</path>
+         <path>frontend/base/default/template/tipping</path>
+         <path>modules/Mediotype_OrderGratuity.xml</path>
+         <path>modules/Mediotype_Core.xml</path>
+         <path>adminhtml/default/default/template/mediotype/core</path>
+         <path>adminhtml/default/default/layout/mediotype-core</path>
+         <path>adminhtml/default/default/mediotype/</path>
+         <path>Mediotype/Core</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+      </ignore>
+   </contents>
+</_>

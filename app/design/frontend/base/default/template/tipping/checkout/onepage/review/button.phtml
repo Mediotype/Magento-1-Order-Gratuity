@@ -1,0 +1,46 @@
+<?php /**
+ * @var $this Mediotype_OrderGratuity_Block_Checkout_Onepage_Review_Button
+ */
+$tip = Mage::getSingleton('checkout/session')->getTipAmount();
+$helper = Mage::helper('mediotype_tipping');
+?>
+<?php if($helper->isEnabled()): ?>
+<form method="post" id="tip-form" class="right">
+    <table>
+        <?php if($this->getShowNote()): ?>
+            <tr>
+                <td colspan="3" class="a-center" style="padding: 0 5px 5px">
+                    <span><?php echo $this->getTippingNote() ?></span>
+                </td>
+            </tr>
+        <?php endif; ?>
+        <tr>
+            <td style="padding: 0 5px 5px">
+                <button type="button" onclick="tipAjax()"
+                        title="<?php echo ($tip) ? $this->__('Change Tip') : $this->__('Add Tip'); ?>"
+                        class="button" >
+                    <span>
+                        <span><?php echo ($tip) ? $this->__('Change Tip') : $this->__('Add Tip'); ?></span>
+                    </span>
+                </button>
+            </td>
+            <td style="padding: 0 5px 5px">
+                <label for="tip" ><?php echo $this->getTippingLabel() ?></label>
+            </td>
+            <td class="a-right" style="padding: 0 5px 5px">
+                <input type="text" name="tip" id="tip" class="input-text validate-number required-entry" style="margin-bottom: 5px;"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<button type="button"
+        title="<?php echo $this->__('Place Order') ?>"
+        class="button btn-checkout" style="clear:both"
+        onclick="submitTipAtPlaceOrder();">
+    <span>
+        <span><?php echo $this->__('Place Order') ?></span>
+    </span>
+</button>
+<?php else: ?>
+    <?php echo $this->getChildHtml('button') ?>
+<?php endif; ?>

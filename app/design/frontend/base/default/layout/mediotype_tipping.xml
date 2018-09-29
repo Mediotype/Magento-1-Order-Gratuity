@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <checkout_cart_index>
+        <reference name="checkout.cart.methods">
+            <action method="unsetChild" ifconfig="tipping_config/general/active"><name>checkout.cart.methods.onepage</name></action>
+            <action method="unsetChild" ifconfig="tipping_config/general/active"><name>checkout.cart.methods.onepage.bottom</name></action>
+            <block type="mediotype_tipping/checkout_onepage_link" name="checkout.cart.methods.onepage.tipping" template="tipping/checkout/form/onepage.phtml" before="-"/>
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="content">
+            <block type="page/html" name="tipping.scripts" as="tipping.scripts" output="toHtml" template="tipping/checkout/onepage/scripts.phtml" />
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_review>
+        <remove name="checkout.onepage.review.button"/>
+        <reference name="root">
+            <block type="mediotype_tipping/checkout_onepage_review_button" name="tipping.checkout.onepage.review.button" as="button" template="tipping/checkout/onepage/review/button.phtml">
+                <block type="core/template" name="checkout.onepage.review.button.child" as="button" template="checkout/onepage/review/button.phtml"/>
+            </block>
+        </reference>
+    </checkout_onepage_review>
+
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="mediotype_tipping/tip" name="order.view.tip.ammount"/>
+        </reference>
+    </sales_order_view>
+
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="mediotype_tipping/tip" name="order.print.tip.ammount"/>
+        </reference>
+    </sales_order_print>
+
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="mediotype_tipping/tip" name="order.items.tip.ammount"/>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="mediotype_tipping/tip" name="order.items.tip.ammount"/>
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="mediotype_tipping/tip" name="order.items.tip.ammount"/>
+        </reference>
+    </sales_email_order_creditmemo_items>
+
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="mediotype_tipping/tip" name="adminhtml.order.view.tip.ammount"/>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

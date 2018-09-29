@@ -1,0 +1,24 @@
+<?php /**
+ * used to output js needed for the tipping module in checkout
+ */
+$helper = Mage::helper('mediotype_tipping');
+?>
+<?php if($helper->isEnabled()): ?>
+<script type="text/javascript">
+//<![CDATA[
+    function tipAjax(){
+        var tipform = new VarienForm('tip-form');
+        if(tipform.validator.validate()){
+            var tip = new Ajax.Request('<?php echo $this->getUrl('tipping/tipping/ajaxTip',array('_secure'=>true)) ?>',{method:'get',parameters:{tip:$('tip').value},asynchronous:false});
+            checkout.reloadReviewBlock();
+        }
+    }
+
+    function submitTipAtPlaceOrder(){
+            new Ajax.Request('<?php echo $this->getUrl('tipping/tipping/ajaxTip',array('_secure'=>true)) ?>', {parameters: {tip: ''+$$('[name="tip"]').first().value + ''}, onSuccess: function (response) {
+                review.save();
+            }.bind(this), evalScripts: true});
+    }
+//]]>
+</script>
+<?php endif; ?>

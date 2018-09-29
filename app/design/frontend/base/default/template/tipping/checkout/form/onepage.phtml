@@ -1,0 +1,103 @@
+<?php
+/**
+ * @var $this Mediotype_OrderGratuity_Block_Checkout_Onepage_Link
+ */
+$tip = Mage::getSingleton('checkout/session')->getTipAmount();
+$helper = Mage::helper('mediotype_tipping');
+?>
+<?php if($helper->isEnabled()): ?>
+<?php if ($this->isPossibleOnepageCheckout()): ?>
+    <form method="post" id="tip-form"
+        <?php if ($this->getUseAjax() == false) : ?>
+          action="<?php echo $this->getTipSubmitUrl() ?>">
+        <?php endif; ?>
+        <table>
+            <?php if ($this->getShowNote()): ?>
+                <tr>
+                    <td colspan="3" class="a-center">
+                        <span><?php echo $this->getTippingNoteHtml() ?></span>
+                    </td>
+                </tr>
+            <?php endif; ?>
+            <tr>
+                <td>
+                    <button type="button"
+                            onclick="cartTipAdd()"
+                            title="<?php echo ($tip) ? $this->__('Change Tip') : $this->__('Add Tip'); ?>"
+                            class="button">
+                        <span>
+                            <span><?php echo ($tip) ? $this->__('Change Tip') : $this->__('Add Tip'); ?></span>
+                        </span>
+                    </button>
+                </td>
+                <td>
+                    <label for="tip"><?php echo $this->getTippingLabelHtml() ?></label>
+                </td>
+                <td class="a-right">
+                    <input type="hidden" name="redirect_url" id="tip_redirect" value="<?php echo $this->getCheckoutUrl() ?>"/>
+                    <input type="text" name="tip" id="tip" class="input-text validate-number" style="width:85px;margin-bottom: 5px;"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <button type="button"
+            title="<?php echo $this->__('Proceed to Checkout') ?>"
+            class="button btn-proceed-checkout btn-checkout <?php echo ($this->isDisabled()) ? "no-checkout" : "" ?>"
+        <?php echo ($this->isDisabled()) ? "disabled=disabled" : "" ?>
+            onclick="gotoCheckout()">
+        <span>
+            <span><?php echo $this->__('Proceed to Checkout') ?></span>
+        </span>
+    </button>
+    <script type="text/javascript">
+        //<![CDATA[
+        tipform = new VarienForm('tip-form');
+
+        function gotoCheckout() {
+            <?php if($this->isTipRequired()): ?>
+            $('tip').addClassName('required-entry');
+            <?php endif; ?>
+
+            if (tipform.validator.validate()) {
+                <?php if( $this->getUseAjax() == false) : ?>
+                tipform.submit();
+                <?php else: ?>
+                new Ajax.Request('<?php echo $this->getTipSubmitUrl() ?>', {parameters: {tip: ''+$$('[name="tip"]').first().value + ''}, onSuccess: function (response) {
+                    window.location='<?php echo $this->getCheckoutUrl() ?>';
+                }.bind(this), evalScripts: true});
+                <?php endif; ?>
+            }
+        }
+
+        function cartTipAdd() {
+
+            <?php if($this->isTipRequired()): ?>
+            $('tip').addClassName('required-entry');
+            <?php endif; ?>
+
+            if (tipform.validator.validate()) {
+                <?php if($this->getUseAjax() == false) : ?>
+                tipform.submit();
+                <?php else: ?>
+                new Ajax.Updater('shopping-cart-totals-table', '<?php echo $this->getTipSubmitUrl() ?>', {parameters: {tip: ''+$$('[name="tip"]').first().value + ''}, onSuccess: function () {
+                    successfulAjaxTip(evt);
+                }.bind(this), evalScripts: true});
+
+                function successfulAjaxTip(transport) {
+                    if (transport && transport.responseText) {
+                        try {
+                            response = eval('(' + transport.responseText + ')');
+                        }
+                        catch (e) {
+                            response = {};
+                        }
+                    }
+                }
+                <?php endif; ?>
+            }
+        }
+
+        //]]>
+    </script>
+<?php endif; ?>
+<?php endif; ?>
